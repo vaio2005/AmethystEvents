@@ -1,0 +1,12 @@
+name: AmethystEvents
+version: ${project.version}
+main: co.uk.lostanddead.amethystevents.AmethystEvents
+api-version: 1.16
+authors: [ LostAndDead ]
+description: Amethyst Events System
+website: https://lostanddead.co.uk
+
+commands:
+  event:
+    description: Gets info on the current event
+    usage: /<command>
