@@ -2,12 +2,16 @@ package co.uk.lostanddead.amethystevents;
 
 import co.uk.lostanddead.amethystevents.Events.KillerBunnies;
 import org.bukkit.Bukkit;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class AmethystEvents extends JavaPlugin {
 
     private String activeEventName;
     private String activeEventDescription;
+    private BossBar title;
 
     @Override
     public void onEnable() {
@@ -38,6 +42,13 @@ public final class AmethystEvents extends JavaPlugin {
         }else{
             Bukkit.getLogger().info("Current event is " + activeEventName);
         }
+
+        title = Bukkit.createBossBar(
+                net.md_5.bungee.api.ChatColor.of("#8d6acc") + "Current Event: " + activeEventName,
+                BarColor.WHITE,
+                BarStyle.SOLID
+        );
+        title.setVisible(true);
     }
 
     @Override
@@ -51,5 +62,9 @@ public final class AmethystEvents extends JavaPlugin {
 
     public String getActiveEventDescription(){
         return activeEventDescription;
+    }
+
+    public BossBar getBar() {
+        return title;
     }
 }
