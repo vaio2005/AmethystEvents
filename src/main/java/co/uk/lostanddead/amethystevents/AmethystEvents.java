@@ -1,6 +1,8 @@
 package co.uk.lostanddead.amethystevents;
 
 import co.uk.lostanddead.amethystevents.Events.KillerBunnies;
+import co.uk.lostanddead.amethystevents.Events.NicePhantoms;
+
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -28,6 +30,13 @@ public final class AmethystEvents extends JavaPlugin {
             case "Killer Bunnies": {
                 //This code is triggered when the event is active, use it to set the name and description
                 KillerBunnies eventClass = new KillerBunnies(this);
+                activeEventName = eventClass.getName();
+                activeEventDescription = eventClass.getDescription();
+                Bukkit.getPluginManager().registerEvents(eventClass, this);
+            }
+
+            case "Nice Phantoms": {
+                NicePhantoms eventClass = new NicePhantoms(this);
                 activeEventName = eventClass.getName();
                 activeEventDescription = eventClass.getDescription();
                 Bukkit.getPluginManager().registerEvents(eventClass, this);
