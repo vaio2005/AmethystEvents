@@ -28,7 +28,7 @@ public class NicePhantoms implements Listener {
 
     @EventHandler
     public void EntityDamageByEntityEvent(EntityDamageByEntityEvent event){
-        if(event.getEntity() instanceof Phantom) {
+        if(event.getDamager() instanceof Phantom) {
             event.setDamage(0);
         }
     }    
