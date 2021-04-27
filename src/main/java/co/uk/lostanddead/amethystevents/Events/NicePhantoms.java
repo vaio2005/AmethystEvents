@@ -23,7 +23,7 @@ public class NicePhantoms implements Listener {
     }
 
     public String getName() {
-        return ChatColor.PURPLE + "Nice Phantoms";
+        return ChatColor.DARK_PURPLE + "Nice Phantoms";
     }
     
     public String getDescription() { return "Phantoms are nice now"; }
