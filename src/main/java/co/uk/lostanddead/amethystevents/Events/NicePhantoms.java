@@ -36,7 +36,7 @@ public class NicePhantoms implements Listener {
 
             event.setDamage(0);
             Player p = (Player) event.getEntity();
-            p.setAbsorptionAmount(2);
+            p.setAbsorptionAmount(1);
 
             scheduler.scheduleSyncDelayedTask((Plugin) this, new Runnable() {
                 @Override
