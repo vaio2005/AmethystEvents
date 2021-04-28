@@ -15,6 +15,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 
 public class NicePhantoms implements Listener {
+    private double amount;
 
     public AmethystEvents core;
 
@@ -36,14 +37,20 @@ public class NicePhantoms implements Listener {
 
             event.setDamage(0);
             Player p = (Player) event.getEntity();
-            p.setAbsorptionAmount(1);
-
-            scheduler.scheduleSyncDelayedTask((Plugin) this, new Runnable() {
+            amount = p.getAbsorptionAmount();
+            if (amount <8) {
+                p.setAbsorptionAmount(amount + 1);
+            }
+            scheduler.runTaskLater(core, new Runnable() {
                 @Override
                 public void run() {
-                    p.setAbsorptionAmount(0);
+                    amount = p.getAbsorptionAmount();
+                    if (amount !=0) {
+                        p.setAbsorptionAmount(amount - 1);
+                    }
                 }
-            }, 100);
+            }, 1200);
+
         }
     }    
 }

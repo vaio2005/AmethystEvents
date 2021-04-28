@@ -33,6 +33,7 @@ public final class AmethystEvents extends JavaPlugin {
                 activeEventName = eventClass.getName();
                 activeEventDescription = eventClass.getDescription();
                 Bukkit.getPluginManager().registerEvents(eventClass, this);
+                break;
             }
 
             case "Nice Phantoms": {
@@ -40,6 +41,7 @@ public final class AmethystEvents extends JavaPlugin {
                 activeEventName = eventClass.getName();
                 activeEventDescription = eventClass.getDescription();
                 Bukkit.getPluginManager().registerEvents(eventClass, this);
+                break;
             }
         }
 
