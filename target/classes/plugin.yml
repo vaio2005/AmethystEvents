@@ -10,3 +10,8 @@ commands:
   event:
     description: Gets info on the current event
     usage: /<command>
+
+permissions:
+  event.reload:
+    description: Allows users to reload events
+    default: false
