@@ -48,7 +48,13 @@ public class TheGuardianExperience implements Listener {
         if (death.getEntity() instanceof Guardian) {
             int drop = ThreadLocalRandom.current().nextInt(0,100);
             if (drop >= 95) {
-                death.getDrops().add(new ItemStack(Material.DIAMOND, 1));
+                death.getDrops().add(new ItemStack(Material.HEART_OF_THE_SEA, 1));
+            }
+            if (drop < 50 && drop > 60) {
+                death.getDrops().add(new ItemStack(Material.SEA_LANTERN, 2));
+            }
+            if (drop == 69) {
+                death.getDrops().add(new ItemStack(Material.TRIDENT, 1));
             }
             console.sendMessage(String.valueOf(drop));
         }
