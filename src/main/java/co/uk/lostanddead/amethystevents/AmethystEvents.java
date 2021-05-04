@@ -4,6 +4,7 @@ import co.uk.lostanddead.amethystevents.Events.Cluck;
 import co.uk.lostanddead.amethystevents.Events.KillerBunnies;
 import co.uk.lostanddead.amethystevents.Events.NicePhantoms;
 
+import co.uk.lostanddead.amethystevents.Events.TheGuardianExperience;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.boss.BarColor;
@@ -59,6 +60,14 @@ public final class AmethystEvents extends JavaPlugin {
 
             case "Cluck": {
                 Cluck eventClass = new Cluck(this);
+                activeEventName = eventClass.getName();
+                activeEventDescription = eventClass.getDescription();
+                Bukkit.getPluginManager().registerEvents(eventClass, this);
+                break;
+            }
+
+            case "The Guardian Experience": {
+                TheGuardianExperience eventClass = new TheGuardianExperience(this);
                 activeEventName = eventClass.getName();
                 activeEventDescription = eventClass.getDescription();
                 Bukkit.getPluginManager().registerEvents(eventClass, this);
