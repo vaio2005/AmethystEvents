@@ -5,10 +5,12 @@ package co.uk.lostanddead.amethystevents.Events;
 import co.uk.lostanddead.amethystevents.AmethystEvents;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Rabbit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -56,5 +58,13 @@ public class Cluck implements Listener {
         PotionEffect falling = new PotionEffect(PotionEffectType.SLOW_FALLING, 1200, 1, true, true, false);
         Player p = event.getPlayer();
         p.addPotionEffect(falling);
+    }
+
+    @EventHandler
+    public void damage(EntityDamageEvent event){
+        if (event.getEntity() instanceof Player){
+            Player p = (Player) event.getEntity();
+            p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_HURT, 1f, 1f);
+        }
     }
 }
