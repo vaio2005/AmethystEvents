@@ -10,6 +10,8 @@ commands:
   event:
     description: Gets info on the current event
     usage: /<command>
+  beginapocalypse:
+    usage: /<command>
 
 permissions:
   event.reload:
