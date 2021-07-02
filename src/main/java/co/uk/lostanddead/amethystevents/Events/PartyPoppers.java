@@ -11,6 +11,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
 
+import java.util.Objects;
+
 public class PartyPoppers implements Listener {
 
     public AmethystEvents core;
@@ -37,7 +39,7 @@ public class PartyPoppers implements Listener {
             event.setCancelled(true);
             creeper.remove();
 
-            Firework f1 = (Firework) loc.getWorld().spawnEntity(loc, EntityType.FIREWORK);
+            Firework f1 = (Firework) Objects.requireNonNull(loc.getWorld()).spawnEntity(loc, EntityType.FIREWORK);
             FireworkMeta f1Meta = f1.getFireworkMeta();
 
             f1Meta.setPower(2);

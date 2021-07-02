@@ -69,6 +69,7 @@ public class startCommand implements CommandExecutor {
                 Player p = Bukkit.getOnlinePlayers().stream().skip((int) (Bukkit.getOnlinePlayers().size() * Math.random())).findFirst().orElse(null);
 
                 Random r = new Random();
+                assert p != null;
                 int x = r.nextInt((int) (p.getLocation().getX() + 100) - (int) (p.getLocation().getX() - 100)) + (int) (p.getLocation().getX() - 100);
                 int z = r.nextInt((int) (p.getLocation().getZ() + 100) - (int) (p.getLocation().getZ() - 100)) + (int) (p.getLocation().getZ() - 100);
                 int y = 30;
@@ -93,7 +94,7 @@ public class startCommand implements CommandExecutor {
         sendLater(ChatColor.RED + "The sky begins to darken...", 20);
 
         new BukkitRunnable(){
-            int count = 0;
+            final int count = 0;
             @Override
             public void run() {
 
@@ -123,14 +124,14 @@ public class startCommand implements CommandExecutor {
 
     private void sendLater(String msg, int seconds){
         new BukkitRunnable(){
-            int count = 0;
+            final int count = 0;
             @Override
             public void run() {
                 for (Player p : Bukkit.getOnlinePlayers()){
                     p.sendTitle(msg, null, 20, 80, 20);
                 }
             }
-        }.runTaskLater(core, seconds*20);
+        }.runTaskLater(core, seconds* 20L);
     }
 
 
