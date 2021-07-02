@@ -30,6 +30,10 @@ public class startCommand implements CommandExecutor {
             return true;
         }
 
+        for (Player p : Bukkit.getOnlinePlayers()){
+            p.playSound(p.getLocation(), "minecraft:event", 0.5F, 1);
+        }
+
         World world = ((Player) commandSender).getWorld();
         world.setTime(10000);
         world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
@@ -44,86 +48,80 @@ public class startCommand implements CommandExecutor {
         new BukkitRunnable(){
             @Override
             public void run() {
-                world.setTime(world.getTime() + 10);
+                world.setTime(world.getTime() + 7);
                 if (world.getTime() >= 15000){
                     this.cancel();
                 }
             }
         }.runTaskTimer(core, 1, 1);
 
-        sendLater(ChatColor.RED + "The clouds begins to merge...", 5);
+        sendLater(ChatColor.RED + "The clouds begins to merge...", 16);
 
         new BukkitRunnable(){
             @Override
             public void run() {
                 world.setStorm(true);
-                world.setThundering(true);
             }
-        }.runTaskLater(core, 4*20);
+        }.runTaskLater(core, 16*20);
+
+        sendLater(ChatColor.RED + "The Sky Begins To Darken...", 32);
+
+        PotionEffect blind = new PotionEffect(PotionEffectType.BLINDNESS, (32*20), 0, true, true, false);
 
         new BukkitRunnable(){
-            int strikes = 0;
             @Override
             public void run() {
-
-                Player p = Bukkit.getOnlinePlayers().stream().skip((int) (Bukkit.getOnlinePlayers().size() * Math.random())).findFirst().orElse(null);
-
-                Random r = new Random();
-                int x = r.nextInt((int) (p.getLocation().getX() + 100) - (int) (p.getLocation().getX() - 100)) + (int) (p.getLocation().getX() - 100);
-                int z = r.nextInt((int) (p.getLocation().getZ() + 100) - (int) (p.getLocation().getZ() - 100)) + (int) (p.getLocation().getZ() - 100);
-                int y = 30;
-
-                Location loc = new Location(world, x ,y, z);
-
-                new BukkitRunnable(){
-                    @Override
-                    public void run() {
-                        world.strikeLightning(loc);
-                    }
-                }.runTaskLater(core, r.nextInt(100 - 10) + 10);
-
-                strikes++;
-
-                if (strikes >= 20){
-                    this.cancel();
-                }
-            }
-        }.runTaskTimer(core, 15*20, 40);
-
-        sendLater(ChatColor.RED + "The sky begins to darken...", 20);
-
-        new BukkitRunnable(){
-            int count = 0;
-            @Override
-            public void run() {
-
-                PotionEffect blind = new PotionEffect(PotionEffectType.BLINDNESS, 40, 1, true, true, false);
-
                 for (Player p : Bukkit.getOnlinePlayers()){
                     p.addPotionEffect(blind);
+                    p.spawnParticle(Particle.MOB_APPEARANCE, p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ(), 1);
+                    p.playSound(p.getLocation(), Sound.ENTITY_WITHER_HURT, 2, 1);
                 }
             }
-        }.runTaskLater(core, 20*20 + 10);
+        }.runTaskLater(core, (33*20));
+
+        strikeLightening(core, (32*20)+10);
+        strikeLightening(core, (39*20)+10);
+        strikeLightening(core, (44*20)+10);
+        strikeLightening(core, (47*20)+10);
+
+        sendLater(ChatColor.RED + "The Monsters Come Out To Play...", 48);
+
+        strikeLightening(core, (48*20)+10);
+        strikeLightening(core, (50*20)+10);
+        strikeLightening(core, (53*20)+10);
+        strikeLightening(core, (56*20)+10);
+        strikeLightening(core, (59*20)+10);
+        strikeLightening(core, (61*20)+10);
+
+        sendLater(ChatColor.RED + "Let The Apocalypse Begin!", 64);
+
+        for (int i = 0; i <= 30; i++){
+            strikeLightening(core, (62*20)+(i*5));
+        }
 
         new BukkitRunnable(){
             @Override
             public void run() {
-                BossBar bossBar = core.getEventBar();
-
                 for (Player p : Bukkit.getOnlinePlayers()){
-                    bossBar.addPlayer(p);
+                    core.getEventBar().addPlayer(p);
                 }
             }
-        }.runTaskLater(core, 20*20 + 5);
+        }.runTaskLater(core, (64*20)-5);
 
-        sendLater(ChatColor.RED + "The monsters come out to play...", 30);
+        new BukkitRunnable(){
+            @Override
+            public void run() {
+                for (Player p : Bukkit.getOnlinePlayers()){
+                    p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1f, 1);
+                }
+            }
+        }.runTaskLater(core, (64*20)+10);
 
         return true;
     }
 
     private void sendLater(String msg, int seconds){
         new BukkitRunnable(){
-            int count = 0;
             @Override
             public void run() {
                 for (Player p : Bukkit.getOnlinePlayers()){
@@ -133,5 +131,24 @@ public class startCommand implements CommandExecutor {
         }.runTaskLater(core, seconds*20);
     }
 
+    private static void strikeLightening(AmethystEvents core, int delay){
 
+        new BukkitRunnable(){
+            @Override
+            public void run() {
+                Player p = Bukkit.getOnlinePlayers().stream().skip((int) (Bukkit.getOnlinePlayers().size() * Math.random())).findFirst().orElse(null);
+                World world = p.getWorld();
+
+                Random r = new Random();
+
+                int x = r.nextInt((int) (p.getLocation().getX() + 100) - (int) (p.getLocation().getX() - 100)) + (int) (p.getLocation().getX() - 100);
+                int z = r.nextInt((int) (p.getLocation().getZ() + 100) - (int) (p.getLocation().getZ() - 100)) + (int) (p.getLocation().getZ() - 100);
+                int y = 30;
+
+                Location loc = new Location(world, x ,y, z);
+
+                world.strikeLightning(loc);
+            }
+        }.runTaskLater(core, delay);
+    }
 }
