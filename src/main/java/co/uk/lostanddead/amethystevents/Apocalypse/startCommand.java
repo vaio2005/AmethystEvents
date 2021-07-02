@@ -2,7 +2,6 @@ package co.uk.lostanddead.amethystevents.Apocalypse;
 
 import co.uk.lostanddead.amethystevents.AmethystEvents;
 import org.bukkit.*;
-import org.bukkit.boss.BossBar;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
