@@ -1,0 +1,208 @@
+#This file is used to configure the behavior of "The Apocalypse" event.
+#All values are in percent to make your life easier.
+
+Zombie:
+  Regular:
+    Health: 20
+    BonusChance: 20
+    Bonuses:
+      - DIAMOND
+      - NETHERITE_INGOT
+      - EMERALD
+
+    ApocalypseSkin: true
+
+  Boss:
+    Health: 30
+    SpawnChance: 20
+    BonusChance: 20
+    Bonuses:
+      - DIAMOND
+      - NETHERITE_INGOT
+      - EMERALD
+
+    Helmet:
+      Type: GOLDEN_HELMET
+      DropChance: 10
+      #Enchantments - 0 to disable
+      Protection: 5
+      ProjectileProtection: 5
+      Unbreaking: 3
+      AquaAfinity: 1
+
+    ChestPlate:
+      Type: GOLDEN_CHESTPLATE
+      DropChance: 10
+      #Enchantments - 0 to disable
+      Protection: 5
+      ProjectileProtection: 5
+      Unbreaking: 3
+      Thorns: 1
+
+    Leggings:
+      Type: GOLDEN_LEGGINGS
+      DropChance: 10
+      #Enchantments - 0 to disable
+      Protection: 5
+      ProjectileProtection: 5
+      Unbreaking: 3
+
+    Boots:
+      Type: GOLDE_BOOTS
+      DropChance: 10
+      #Enchantments - 0 to disable
+      Protection: 5
+      ProjectileProtection: 5
+      Unbreaking: 3
+
+    Weapon:
+      Type: NETHERITE_SWORD
+      DropChance: 10
+      #Enchantments - 0 to disable
+      Sharpness: 5
+      SweepingEdge: 3
+      FireAspect: 2
+      Looting: 3
+      Unbreaking: 3
+
+    Names:
+      - Skipper
+      - Kowalski
+      - Private
+      - Rico
+
+
+
+Skeleton:
+  Regular:
+    Health: 20
+    BonusChance: 20
+    Bonuses:
+      - DIAMOND
+      - NETHERITE_INGOT
+      - EMERALD
+
+    ApocalypseSkin: true
+
+  Boss:
+    Health: 30
+    SpawnChance: 20
+    BonusChance: 20
+    Bonuses:
+      - DIAMOND
+      - NETHERITE_INGOT
+      - EMERALD
+
+    Helmet:
+      Type: GOLDEN_HELMET
+      DropChance: 10
+      #Enchantments - 0 to disable
+      Protection: 5
+      ProjectileProtection: 5
+      Unbreaking: 3
+      AquaAfinity: 1
+
+    ChestPlate:
+      Type: GOLDEN_CHESTPLATE
+      DropChance: 10
+      #Enchantments - 0 to disable
+      Protection: 5
+      ProjectileProtection: 5
+      Unbreaking: 3
+      Thorns: 1
+
+    Leggings:
+      Type: GOLDEN_LEGGINGS
+      DropChance: 10
+      #Enchantments - 0 to disable
+      Protection: 5
+      ProjectileProtection: 5
+      Unbreaking: 3
+
+    Boots:
+      Type: GOLDE_BOOTS
+      DropChance: 10
+      #Enchantments - 0 to disable
+      Protection: 5
+      ProjectileProtection: 5
+      Unbreaking: 3
+
+    Weapon:
+      Type: BOW
+      DropChance: 10
+      #Enchantments - 0 to disable
+      Power: 5
+      Punch: 2
+      Fire: 2
+      Infinity: 1
+      Unbreaking: 3
+
+    Names:
+      - Jack Skellington
+      - Skeletor
+      - Napoleon Bone-apart
+      - Spooky Scary
+
+
+
+Rider:
+  Boss:
+    Health: 30
+    SpawnChance: 20
+    BonusChance: 20
+    Bonuses:
+      - DIAMOND
+      - NETHERITE_INGOT
+      - EMERALD
+
+    Names:
+      - Dovahkiin
+      - That dude on a horse
+      - Some Knight
+      - This guy has a sweet horse
+
+
+
+Spider:
+  Regular:
+    Health: 16
+
+  Boss:
+    Health: 24
+    SpawnChance: 20
+    GlowingEffect: true
+    Invisible: true
+    RiderChance: 10
+    BonusChance: 20
+    Bonuses:
+      - DIAMOND
+      - NETHERITE_INGOT
+      - EMERALD
+
+    Names:
+      - Shelob
+      - Aragog
+      - Anansi
+      - Jorōgumo
+
+
+Villager:
+  Regular:
+    ApocalypseSkin: true
+
+  Boss:
+    Health: 26
+    SpawnChance: 20
+    BonusChance: 10
+    BonusDropChance: 10
+
+
+
+Horse:
+  SpawnRatio: 50 #Percentage of spawned horses that are Zombies. The rest will be skeletons
+
+  ZombieHorse:
+    RiderChance: 20
+
+  SkeletonHorse:
+    RiderChance: 20
