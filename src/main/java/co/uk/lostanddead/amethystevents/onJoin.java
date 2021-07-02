@@ -15,7 +15,14 @@ public class onJoin implements Listener {
 
     @EventHandler
     public void join(PlayerJoinEvent event){
-        //event.getPlayer().setPlayerListHeader("\n          " + net.md_5.bungee.api.ChatColor.of("#8d6acc") + "Current Event: " + core.getActiveEventName() + "          \n");
-        core.getBar().addPlayer(event.getPlayer());
+        if (core.getBar() != null){
+            core.getBar().addPlayer(event.getPlayer());
+            return;
+        }
+        if (core.getEventBar() != null && core.isApocalypseEnabled()){
+            core.getEventBar().addPlayer(event.getPlayer());
+            return;
+        }
+
     }
 }

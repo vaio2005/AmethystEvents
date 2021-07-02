@@ -1,15 +1,18 @@
 package co.uk.lostanddead.amethystevents;
 
+import co.uk.lostanddead.amethystevents.Apocalypse.startCommand;
 import co.uk.lostanddead.amethystevents.Events.Cluck;
 import co.uk.lostanddead.amethystevents.Events.KillerBunnies;
 import co.uk.lostanddead.amethystevents.Events.NicePhantoms;
-
 import co.uk.lostanddead.amethystevents.Events.TheGuardianExperience;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
+import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,14 +21,28 @@ public final class AmethystEvents extends JavaPlugin {
     private String activeEventName;
     private String activeEventDescription;
     private BossBar title;
+    private BossBar eventBar;
+
+    private boolean apocalypseEnabled = false;
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
 
-        getCommand("event").setExecutor(new eventCommand(this));
+        apocalypseEnabled = getConfig().getBoolean("apocalypse");
 
+        getCommand("event").setExecutor(new eventCommand(this));
+        getCommand("beginapocalypse").setExecutor(new startCommand(this));
         findEvent();
+
+        eventBar = Bukkit.createBossBar(
+                ChatColor.DARK_GRAY + "" + ChatColor.MAGIC + "hh " + ChatColor.RESET + "" + ChatColor.RED + "The Apocalypse" + ChatColor.DARK_GRAY + "" + ChatColor.MAGIC + " hh",
+                BarColor.WHITE,
+                BarStyle.SOLID
+        );
+
+        eventBar.addFlag(BarFlag.CREATE_FOG);
+        eventBar.addFlag(BarFlag.DARKEN_SKY);
     }
 
     @Override
@@ -79,17 +96,20 @@ public final class AmethystEvents extends JavaPlugin {
             Bukkit.getLogger().info("No event loaded");
             activeEventName = ChatColor.RESET + "No event loaded";
             activeEventDescription = ChatColor.RESET + "No event loaded";
-        }else{
+            return;
+        }else {
             Bukkit.getLogger().info("Current event is " + activeEventName);
+            title = Bukkit.createBossBar(
+                    net.md_5.bungee.api.ChatColor.of("#8d6acc") + "Current Event: " + activeEventName,
+                    BarColor.WHITE,
+                    BarStyle.SOLID
+            );
+            title.setVisible(true);
+
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                getBar().addPlayer(p);
+            }
         }
-
-        title = Bukkit.createBossBar(
-                net.md_5.bungee.api.ChatColor.of("#8d6acc") + "Current Event: " + activeEventName,
-                BarColor.WHITE,
-                BarStyle.SOLID
-        );
-        title.setVisible(true);
-
     }
 
     public String getActiveEventName(){
@@ -102,5 +122,17 @@ public final class AmethystEvents extends JavaPlugin {
 
     public BossBar getBar() {
         return title;
+    }
+
+    public BossBar getEventBar(){
+        return eventBar;
+    }
+
+    public boolean isApocalypseEnabled() {
+        return apocalypseEnabled;
+    }
+
+    public void setApocalypseEnabled(boolean apocalypseEnabled) {
+        this.apocalypseEnabled = apocalypseEnabled;
     }
 }

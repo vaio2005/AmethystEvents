@@ -6,8 +6,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import java.util.Locale;
-
 public class eventCommand implements CommandExecutor {
 
     public AmethystEvents core;
@@ -21,6 +19,7 @@ public class eventCommand implements CommandExecutor {
         Bukkit.getLogger().info(args.toString());
         if (args[0] != null){
             if (args[0].toLowerCase() == "reload" && sender.hasPermission("event.reload")){
+                core.getBar().removeAll();
                 Bukkit.getLogger().info("Reloading Events");
                 sender.sendMessage(ChatColor.AQUA + "Reloading Events");
                 core.reloadConfig();
