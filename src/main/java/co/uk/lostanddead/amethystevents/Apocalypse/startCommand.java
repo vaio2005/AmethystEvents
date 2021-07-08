@@ -112,6 +112,7 @@ public class startCommand implements CommandExecutor {
             public void run() {
                 for (Player p : Bukkit.getOnlinePlayers()){
                     p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1f, 1);
+                    core.findEvent();
                 }
             }
         }.runTaskLater(core, (64*20)+10);

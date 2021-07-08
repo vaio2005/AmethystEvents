@@ -1,5 +1,6 @@
 package co.uk.lostanddead.amethystevents;
 
+import co.uk.lostanddead.amethystevents.Apocalypse.ApocalypseMain;
 import co.uk.lostanddead.amethystevents.Apocalypse.startCommand;
 import co.uk.lostanddead.amethystevents.Events.Cluck;
 import co.uk.lostanddead.amethystevents.Events.KillerBunnies;
@@ -56,6 +57,13 @@ public final class AmethystEvents extends JavaPlugin {
         //We must unregister any old events
         HandlerList.unregisterAll();
         Bukkit.getPluginManager().registerEvents(new onJoin(this), this);
+        if (apocalypseEnabled){
+            ApocalypseMain apocalypseMain = new ApocalypseMain(this);
+            activeEventName = ChatColor.DARK_GRAY + "" + ChatColor.MAGIC + "hh " + ChatColor.RESET + "" + ChatColor.RED + "The Apocalypse" + ChatColor.DARK_GRAY + "" + ChatColor.MAGIC + " hh";
+            activeEventDescription = ChatColor.RED + "The End is Nigh";
+            Bukkit.getPluginManager().registerEvents(apocalypseMain, this);
+            return;
+        }
         switch (event){
             //Chose a config friendly name
             case "Killer Bunnies": {
