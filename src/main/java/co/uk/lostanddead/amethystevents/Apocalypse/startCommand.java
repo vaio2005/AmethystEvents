@@ -30,7 +30,7 @@ public class startCommand implements CommandExecutor {
         }
 
         for (Player p : Bukkit.getOnlinePlayers()){
-            p.playSound(p.getLocation(), "minecraft:event", 0.5F, 1);
+            p.playSound(p.getLocation(), "minecraft:event", 0.75F, 1);
         }
 
         World world = ((Player) commandSender).getWorld();
