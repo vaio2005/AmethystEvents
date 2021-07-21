@@ -2,6 +2,7 @@ package co.uk.lostanddead.amethystevents;
 
 import co.uk.lostanddead.amethystevents.Apocalypse.ApocalypseMain;
 import co.uk.lostanddead.amethystevents.Apocalypse.startCommand;
+import co.uk.lostanddead.amethystevents.Apocalypse.summonCommand;
 import co.uk.lostanddead.amethystevents.Events.Cluck;
 import co.uk.lostanddead.amethystevents.Events.KillerBunnies;
 import co.uk.lostanddead.amethystevents.Events.NicePhantoms;
@@ -34,6 +35,7 @@ public final class AmethystEvents extends JavaPlugin {
 
         getCommand("event").setExecutor(new eventCommand(this));
         getCommand("beginapocalypse").setExecutor(new startCommand(this));
+        getCommand("summonboss").setExecutor(new summonCommand(this));
         findEvent();
 
         eventBar = Bukkit.createBossBar(

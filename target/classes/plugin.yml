@@ -12,6 +12,8 @@ commands:
     usage: /<command>
   beginapocalypse:
     usage: /<command>
+  summonboss:
+    usage: /<command>
 
 permissions:
   event.reload:

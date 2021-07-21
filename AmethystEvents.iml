@@ -41,11 +41,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://D:/Code/Java/Depends/spigot-1.17.jar!/" />
+          <root url="jar://D:/Code/Java/Depends/spigot-1.17.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://D:/Code/Java/Depends/spigot-1.17.jar!/" />
+          <root url="jar://D:/Code/Java/Depends/spigot-1.17.1.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>

@@ -6,7 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -81,12 +81,9 @@ public class startCommand implements CommandExecutor {
 
         sendLater(ChatColor.RED + "The Monsters Come Out To Play...", 48);
 
-        strikeLightening(core, (48*20)+10);
-        strikeLightening(core, (50*20)+10);
-        strikeLightening(core, (53*20)+10);
-        strikeLightening(core, (56*20)+10);
-        strikeLightening(core, (59*20)+10);
-        strikeLightening(core, (61*20)+10);
+        for (int i = 0; i <= 32; i++){
+            spawnMob(core, (48*20)+(i*5));
+        }
 
         sendLater(ChatColor.RED + "Let The Apocalypse Begin!", 64);
 
@@ -134,20 +131,61 @@ public class startCommand implements CommandExecutor {
     private static void strikeLightening(AmethystEvents core, int delay){
 
         new BukkitRunnable(){
+            Random r = new Random();
             @Override
             public void run() {
                 Player p = Bukkit.getOnlinePlayers().stream().skip((int) (Bukkit.getOnlinePlayers().size() * Math.random())).findFirst().orElse(null);
                 World world = p.getWorld();
 
-                Random r = new Random();
-
                 int x = r.nextInt((int) (p.getLocation().getX() + 100) - (int) (p.getLocation().getX() - 100)) + (int) (p.getLocation().getX() - 100);
                 int z = r.nextInt((int) (p.getLocation().getZ() + 100) - (int) (p.getLocation().getZ() - 100)) + (int) (p.getLocation().getZ() - 100);
-                int y = 30;
+                int y = world.getHighestBlockAt(x, z).getY();
 
                 Location loc = new Location(world, x ,y, z);
 
                 world.strikeLightning(loc);
+            }
+        }.runTaskLater(core, delay);
+    }
+
+    private static void spawnMob(AmethystEvents core, int delay){
+
+        new BukkitRunnable(){
+            Random r = new Random();
+            mobsSetup mobs = new mobsSetup(core);
+            @Override
+            public void run(){
+
+                Player p = Bukkit.getOnlinePlayers().stream().skip((int) (Bukkit.getOnlinePlayers().size() * Math.random())).findFirst().orElse(null);
+                World world = p.getWorld();
+
+                int x = r.nextInt((int) (p.getLocation().getX() + 100) - (int) (p.getLocation().getX() - 100)) + (int) (p.getLocation().getX() - 100);
+                int z = r.nextInt((int) (p.getLocation().getZ() + 100) - (int) (p.getLocation().getZ() - 100)) + (int) (p.getLocation().getZ() - 100);
+                int y = world.getHighestBlockAt(x, z).getY() + 1;
+
+                Location loc = new Location(world, x ,y, z);
+
+                int typeInt = r.nextInt(3);
+
+                switch (typeInt){
+                    case 0:
+                        Zombie zombie = (Zombie) world.spawnEntity(loc, EntityType.ZOMBIE);
+                        mobs.editBossZombie(zombie);
+                        break;
+                    case 1:
+                        Skeleton skeleton = (Skeleton) world.spawnEntity(loc, EntityType.SKELETON);
+                        mobs.editBossSkeleton(skeleton);
+                        break;
+                    case 2:
+                        Spider spider = (Spider) world.spawnEntity(loc, EntityType.SPIDER);
+                        mobs.editBossSpider(spider);
+                        break;
+                }
+
+                int strikeInt = r.nextInt(2);
+                if (strikeInt == 1){
+                    world.strikeLightning(loc);
+                }
             }
         }.runTaskLater(core, delay);
     }

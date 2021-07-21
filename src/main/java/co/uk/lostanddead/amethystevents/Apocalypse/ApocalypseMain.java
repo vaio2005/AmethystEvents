@@ -22,7 +22,7 @@ public class ApocalypseMain implements Listener {
 
     public ApocalypseMain(AmethystEvents core){
         this.core = core;
-        mobs = new mobsSetup();
+        mobs = new mobsSetup(core);
         rand = new Random();
     }
 
@@ -39,7 +39,7 @@ public class ApocalypseMain implements Listener {
 
     @EventHandler
     public void onSpawn(EntitySpawnEvent event){
-        int randomInt = rand.nextInt(5);
+        int randomInt = rand.nextInt(101);
         switch (event.getEntityType()){
             case ZOMBIE:
                 Zombie zombie = (Zombie) event.getEntity();
