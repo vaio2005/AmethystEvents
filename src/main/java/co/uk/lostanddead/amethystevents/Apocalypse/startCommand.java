@@ -39,10 +39,6 @@ public class startCommand implements CommandExecutor {
         world.setGameRule(GameRule.DO_WEATHER_CYCLE, false);
         world.setStorm(false);
         world.setThundering(false);
-        core.getConfig().set("apocalypse", true);
-        core.saveConfig();
-        core.setApocalypseEnabled(true);
-        core.reloadConfig();
 
         new BukkitRunnable(){
             @Override
@@ -112,6 +108,10 @@ public class startCommand implements CommandExecutor {
             public void run() {
                 for (Player p : Bukkit.getOnlinePlayers()){
                     p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1f, 1);
+                    core.getConfig().set("apocalypse", true);
+                    core.saveConfig();
+                    core.setApocalypseEnabled(true);
+                    core.reloadConfig();
                     core.findEvent();
                 }
             }
