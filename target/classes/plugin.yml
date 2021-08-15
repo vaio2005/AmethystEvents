@@ -1,10 +1,14 @@
 name: AmethystEvents
 version: 1.0-SNAPSHOT
 main: co.uk.lostanddead.amethystevents.AmethystEvents
-api-version: 1.16
+api-version: 1.17
 authors: [ LostAndDead ]
 description: Amethyst Events System
 website: https://lostanddead.co.uk
+permissions:
+  events.reload:
+    description: Allows users to reload events
+    default: false
 
 commands:
   event:
@@ -12,10 +16,13 @@ commands:
     usage: /<command>
   beginapocalypse:
     usage: /<command>
+    permission: events.reload
+    permission-message: ""
+  sendprep:
+    usage: /<command>
+    permission: events.reload
+    permission-message: ""
   summonboss:
     usage: /<command>
-
-permissions:
-  event.reload:
-    description: Allows users to reload events
-    default: false
+    permission: events.reload
+    permission-message: ""

@@ -25,10 +25,6 @@ public class startCommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof ConsoleCommandSender){ return true; }
 
-        if (!((Player) commandSender).isOp()){
-            return true;
-        }
-
         for (Player p : Bukkit.getOnlinePlayers()){
             p.playSound(p.getLocation(), "minecraft:event", 0.75F, 1);
         }
@@ -85,7 +81,7 @@ public class startCommand implements CommandExecutor {
             spawnMob(core, (48*20)+(i*5));
         }
 
-        sendLater(ChatColor.RED + "Let The Apocalypse Begin!", 64);
+        sendLater("한" + ChatColor.RED + "Let The Apocalypse Begin! " + ChatColor.RESET + "한", 64);
 
         for (int i = 0; i <= 30; i++){
             strikeLightening(core, (62*20)+(i*5));
@@ -165,7 +161,7 @@ public class startCommand implements CommandExecutor {
 
                 Location loc = new Location(world, x ,y, z);
 
-                int typeInt = r.nextInt(3);
+                int typeInt = r.nextInt(4);
 
                 switch (typeInt){
                     case 0:
@@ -179,6 +175,10 @@ public class startCommand implements CommandExecutor {
                     case 2:
                         Spider spider = (Spider) world.spawnEntity(loc, EntityType.SPIDER);
                         mobs.editBossSpider(spider);
+                        break;
+                    case 3:
+                        Creeper creeper = (Creeper) world.spawnEntity(loc, EntityType.CREEPER);
+                        mobs.editBossCreeper(creeper);
                         break;
                 }
 

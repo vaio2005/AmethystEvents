@@ -25,10 +25,6 @@ public class summonCommand implements CommandExecutor {
             return true;
         }
 
-        if (!((Player) commandSender).isOp()){
-            return true;
-        }
-
         if (strings.length <= 0){
             return true;
         }
@@ -49,6 +45,10 @@ public class summonCommand implements CommandExecutor {
             case "spider":
                 Spider spider = (Spider) world.spawnEntity(loc, EntityType.SPIDER);
                 mobs.editBossSpider(spider);
+                break;
+            case "creeper":
+                Creeper creeper = (Creeper) world.spawnEntity(loc, EntityType.CREEPER);
+                mobs.editBossCreeper(creeper);
                 break;
         }
         return true;

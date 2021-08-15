@@ -1,6 +1,7 @@
 package co.uk.lostanddead.amethystevents;
 
 import co.uk.lostanddead.amethystevents.Apocalypse.ApocalypseMain;
+import co.uk.lostanddead.amethystevents.Apocalypse.prepCommand;
 import co.uk.lostanddead.amethystevents.Apocalypse.startCommand;
 import co.uk.lostanddead.amethystevents.Apocalypse.summonCommand;
 import co.uk.lostanddead.amethystevents.Events.Cluck;
@@ -29,14 +30,15 @@ public final class AmethystEvents extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        saveDefaultConfig();
+        this.saveDefaultConfig();
 
-        apocalypseEnabled = getConfig().getBoolean("apocalypse");
+        apocalypseEnabled = this.getConfig().getBoolean("apocalypse");
 
-        getCommand("event").setExecutor(new eventCommand(this));
-        getCommand("beginapocalypse").setExecutor(new startCommand(this));
-        getCommand("summonboss").setExecutor(new summonCommand(this));
-        findEvent();
+        this.getCommand("event").setExecutor(new eventCommand(this));
+        this.getCommand("beginapocalypse").setExecutor(new startCommand(this));
+        this.getCommand("summonboss").setExecutor(new summonCommand(this));
+        this.getCommand("sendprep").setExecutor(new prepCommand(this));
+        this.findEvent();
 
         eventBar = Bukkit.createBossBar(
                 ChatColor.DARK_GRAY + "" + ChatColor.MAGIC + "hh " + ChatColor.RESET + "" + ChatColor.RED + "The Apocalypse" + ChatColor.DARK_GRAY + "" + ChatColor.MAGIC + " hh",

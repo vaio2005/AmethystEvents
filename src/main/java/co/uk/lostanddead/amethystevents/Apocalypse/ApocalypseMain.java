@@ -9,6 +9,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.player.PlayerBedEnterEvent;
 
@@ -65,6 +66,14 @@ public class ApocalypseMain implements Listener {
                     mobs.editSpider(spider);
                 }
                 break;
+            case CREEPER:
+                Creeper creeper = (Creeper) event.getEntity();
+                if (randomInt == 1){
+                    mobs.editBossCreeper(creeper);
+                }else{
+                    mobs.editCreeper(creeper);
+                }
+                break;
             case HORSE:
                 Horse horse = (Horse) event.getEntity();
 
@@ -83,6 +92,7 @@ public class ApocalypseMain implements Listener {
                 }
 
                 event.setCancelled(true);
+                break;
         }
     }
 }

@@ -47,14 +47,22 @@ public class mobsSetup {
 
     public Spider editSpider(Spider spider){
         spider.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(5);
-        spider.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20);
-        spider.setHealth(20);
+        spider.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(25);
+        spider.setHealth(25);
         spider.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.4);
         return spider;
     }
 
+    public Creeper editCreeper(Creeper creeper){
+        creeper.setExplosionRadius(4);
+        creeper.setMaxFuseTicks(20);
+        creeper.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(30);
+        creeper.setHealth(30);
+        return creeper;
+    }
+
     public Zombie editBossZombie(Zombie zombie){
-        zombie.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(6);
+        zombie.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(8);
         zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(5.5);
         zombie.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(50);
         zombie.setHealth(50);
@@ -99,7 +107,7 @@ public class mobsSetup {
     }
 
     public Skeleton editBossSkeleton(Skeleton skeleton){
-        skeleton.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(5);
+        skeleton.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(7);
         skeleton.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(5);
         skeleton.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(50);
         skeleton.setHealth(50);
@@ -143,7 +151,7 @@ public class mobsSetup {
     }
 
     public Spider editBossSpider(Spider spider){
-        spider.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(5);
+        spider.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(7);
         spider.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(5);
         spider.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(50);
         spider.setHealth(50);
@@ -174,5 +182,40 @@ public class mobsSetup {
         PotionEffect fireImmune = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1);
         spider.addPotionEffect(fireImmune);
         return spider;
+    }
+
+    public Creeper editBossCreeper(Creeper creeper){
+        creeper.setPowered(true);
+        creeper.setExplosionRadius(4);
+        creeper.setMaxFuseTicks(20);
+        creeper.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.3);
+
+        ItemStack helmet = new ItemStack(Material.PAPER);
+
+        ItemMeta helmetItemMeta = helmet.getItemMeta();
+        helmetItemMeta.setCustomModelData(3);
+        helmetItemMeta.setUnbreakable(true);
+        helmetItemMeta.setDisplayName(ChatColor.WHITE + "Creeper Lord Crown");
+        helmetItemMeta.getPersistentDataContainer().set(new NamespacedKey(core, "AE-UUID"), PersistentDataType.STRING, creeper.getUniqueId().toString());
+        List<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.RED + "Obtained from defeating a Creeper Lord");
+        lore.add(ChatColor.RED + "During the Apocalypse Event");
+        helmetItemMeta.setLore(lore);
+        helmet.setItemMeta(helmetItemMeta);
+
+        helmet.addUnsafeEnchantment(Enchantment.THORNS, 3);
+        helmet.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+
+        creeper.getEquipment().setHelmet(helmet);
+        creeper.getEquipment().setHelmetDropChance(0.20F);
+
+        creeper.setCustomNameVisible(true);
+        creeper.setCustomName(ChatColor.RED + "" + ChatColor.MAGIC + "hh" + ChatColor.GREEN + " Creeper Lord " + ChatColor.RED + "" + ChatColor.MAGIC + "hh");
+        creeper.setPersistent(true);
+
+        PotionEffect fireImmune = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20, 1);
+        creeper.addPotionEffect(fireImmune);
+        return creeper;
     }
 }
