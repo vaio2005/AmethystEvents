@@ -16,13 +16,7 @@ commands:
     usage: /<command>
   beginapocalypse:
     usage: /<command>
-    permission: events.reload
-    permission-message: ""
   sendprep:
     usage: /<command>
-    permission: events.reload
-    permission-message: ""
   summonboss:
     usage: /<command>
-    permission: events.reload
-    permission-message: ""

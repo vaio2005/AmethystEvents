@@ -17,8 +17,8 @@ public class eventCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Bukkit.getLogger().info(args.toString());
-        if (args[0] != null){
-            if (args[0].toLowerCase() == "reload" && sender.hasPermission("event.reload")){
+        if (args.length >= 1){
+            if (args[0].toLowerCase() == "reload" && sender.hasPermission("events.reload")){
                 core.getBar().removeAll();
                 Bukkit.getLogger().info("Reloading Events");
                 sender.sendMessage(ChatColor.AQUA + "Reloading Events");

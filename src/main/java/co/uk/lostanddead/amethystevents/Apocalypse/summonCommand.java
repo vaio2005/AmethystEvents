@@ -25,31 +25,33 @@ public class summonCommand implements CommandExecutor {
             return true;
         }
 
-        if (strings.length <= 0){
-            return true;
-        }
+        if (commandSender.hasPermission("events.reload")) {
+            if (strings.length <= 0) {
+                return true;
+            }
 
-        Player p = (Player) commandSender;
-        World world = p.getWorld();
-        Location loc = p.getLocation();
+            Player p = (Player) commandSender;
+            World world = p.getWorld();
+            Location loc = p.getLocation();
 
-        switch (strings[0].toLowerCase()){
-            case "zombie":
-                Zombie zombie = (Zombie) world.spawnEntity(loc, EntityType.ZOMBIE);
-                mobs.editBossZombie(zombie);
-                break;
-            case "skeleton":
-                Skeleton skeleton = (Skeleton) world.spawnEntity(loc, EntityType.SKELETON);
-                mobs.editBossSkeleton(skeleton);
-                break;
-            case "spider":
-                Spider spider = (Spider) world.spawnEntity(loc, EntityType.SPIDER);
-                mobs.editBossSpider(spider);
-                break;
-            case "creeper":
-                Creeper creeper = (Creeper) world.spawnEntity(loc, EntityType.CREEPER);
-                mobs.editBossCreeper(creeper);
-                break;
+            switch (strings[0].toLowerCase()) {
+                case "zombie":
+                    Zombie zombie = (Zombie) world.spawnEntity(loc, EntityType.ZOMBIE);
+                    mobs.editBossZombie(zombie);
+                    break;
+                case "skeleton":
+                    Skeleton skeleton = (Skeleton) world.spawnEntity(loc, EntityType.SKELETON);
+                    mobs.editBossSkeleton(skeleton);
+                    break;
+                case "spider":
+                    Spider spider = (Spider) world.spawnEntity(loc, EntityType.SPIDER);
+                    mobs.editBossSpider(spider);
+                    break;
+                case "creeper":
+                    Creeper creeper = (Creeper) world.spawnEntity(loc, EntityType.CREEPER);
+                    mobs.editBossCreeper(creeper);
+                    break;
+            }
         }
         return true;
     }

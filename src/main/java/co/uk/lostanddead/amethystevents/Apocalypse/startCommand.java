@@ -24,92 +24,93 @@ public class startCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof ConsoleCommandSender){ return true; }
+        if (commandSender.hasPermission("events.reload")) {
 
-        for (Player p : Bukkit.getOnlinePlayers()){
-            p.playSound(p.getLocation(), "minecraft:event", 0.75F, 1);
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                p.playSound(p.getLocation(), "minecraft:event", 0.75F, 1);
+            }
+
+            World world = ((Player) commandSender).getWorld();
+            world.setTime(10000);
+            world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
+            world.setGameRule(GameRule.DO_WEATHER_CYCLE, false);
+            world.setStorm(false);
+            world.setThundering(false);
+
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    world.setTime(world.getTime() + 7);
+                    if (world.getTime() >= 15000) {
+                        this.cancel();
+                    }
+                }
+            }.runTaskTimer(core, 1, 1);
+
+            sendLater(ChatColor.RED + "The clouds begins to merge...", 16);
+
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    world.setStorm(true);
+                }
+            }.runTaskLater(core, 16 * 20);
+
+            sendLater(ChatColor.RED + "The Sky Begins To Darken...", 32);
+
+            PotionEffect blind = new PotionEffect(PotionEffectType.BLINDNESS, (32 * 20), 0, true, true, false);
+
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        p.addPotionEffect(blind);
+                        p.spawnParticle(Particle.MOB_APPEARANCE, p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ(), 1);
+                        p.playSound(p.getLocation(), Sound.ENTITY_WITHER_HURT, 2, 1);
+                    }
+                }
+            }.runTaskLater(core, (33 * 20));
+
+            strikeLightening(core, (32 * 20) + 10);
+            strikeLightening(core, (39 * 20) + 10);
+            strikeLightening(core, (44 * 20) + 10);
+            strikeLightening(core, (47 * 20) + 10);
+
+            sendLater(ChatColor.RED + "The Monsters Come Out To Play...", 48);
+
+            for (int i = 0; i <= 32; i++) {
+                spawnMob(core, (48 * 20) + (i * 5));
+            }
+
+            sendLater("한" + ChatColor.RED + "Let The Apocalypse Begin! " + ChatColor.RESET + "한", 64);
+
+            for (int i = 0; i <= 30; i++) {
+                strikeLightening(core, (62 * 20) + (i * 5));
+            }
+
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        core.getEventBar().addPlayer(p);
+                    }
+                }
+            }.runTaskLater(core, (64 * 20) - 5);
+
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1f, 1);
+                        core.getConfig().set("apocalypse", true);
+                        core.saveConfig();
+                        core.setApocalypseEnabled(true);
+                        core.reloadConfig();
+                        core.findEvent();
+                    }
+                }
+            }.runTaskLater(core, (64 * 20) + 10);
         }
-
-        World world = ((Player) commandSender).getWorld();
-        world.setTime(10000);
-        world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
-        world.setGameRule(GameRule.DO_WEATHER_CYCLE, false);
-        world.setStorm(false);
-        world.setThundering(false);
-
-        new BukkitRunnable(){
-            @Override
-            public void run() {
-                world.setTime(world.getTime() + 7);
-                if (world.getTime() >= 15000){
-                    this.cancel();
-                }
-            }
-        }.runTaskTimer(core, 1, 1);
-
-        sendLater(ChatColor.RED + "The clouds begins to merge...", 16);
-
-        new BukkitRunnable(){
-            @Override
-            public void run() {
-                world.setStorm(true);
-            }
-        }.runTaskLater(core, 16*20);
-
-        sendLater(ChatColor.RED + "The Sky Begins To Darken...", 32);
-
-        PotionEffect blind = new PotionEffect(PotionEffectType.BLINDNESS, (32*20), 0, true, true, false);
-
-        new BukkitRunnable(){
-            @Override
-            public void run() {
-                for (Player p : Bukkit.getOnlinePlayers()){
-                    p.addPotionEffect(blind);
-                    p.spawnParticle(Particle.MOB_APPEARANCE, p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ(), 1);
-                    p.playSound(p.getLocation(), Sound.ENTITY_WITHER_HURT, 2, 1);
-                }
-            }
-        }.runTaskLater(core, (33*20));
-
-        strikeLightening(core, (32*20)+10);
-        strikeLightening(core, (39*20)+10);
-        strikeLightening(core, (44*20)+10);
-        strikeLightening(core, (47*20)+10);
-
-        sendLater(ChatColor.RED + "The Monsters Come Out To Play...", 48);
-
-        for (int i = 0; i <= 32; i++){
-            spawnMob(core, (48*20)+(i*5));
-        }
-
-        sendLater("한" + ChatColor.RED + "Let The Apocalypse Begin! " + ChatColor.RESET + "한", 64);
-
-        for (int i = 0; i <= 30; i++){
-            strikeLightening(core, (62*20)+(i*5));
-        }
-
-        new BukkitRunnable(){
-            @Override
-            public void run() {
-                for (Player p : Bukkit.getOnlinePlayers()){
-                    core.getEventBar().addPlayer(p);
-                }
-            }
-        }.runTaskLater(core, (64*20)-5);
-
-        new BukkitRunnable(){
-            @Override
-            public void run() {
-                for (Player p : Bukkit.getOnlinePlayers()){
-                    p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1f, 1);
-                    core.getConfig().set("apocalypse", true);
-                    core.saveConfig();
-                    core.setApocalypseEnabled(true);
-                    core.reloadConfig();
-                    core.findEvent();
-                }
-            }
-        }.runTaskLater(core, (64*20)+10);
-
         return true;
     }
 
