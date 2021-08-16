@@ -5,10 +5,7 @@ api-version: 1.17
 authors: [ LostAndDead ]
 description: Amethyst Events System
 website: https://lostanddead.co.uk
-permissions:
-  events.reload:
-    description: Allows users to reload events
-    default: false
+load: POSTWORLD
 
 commands:
   event:
