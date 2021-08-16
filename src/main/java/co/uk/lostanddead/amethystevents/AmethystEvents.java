@@ -59,7 +59,6 @@ public final class AmethystEvents extends JavaPlugin {
         //When adding an event make sure to add it to this switch with a config friendly name
         String event = getConfig().getString("event");
         //We must unregister any old events
-        HandlerList.unregisterAll();
         Bukkit.getPluginManager().registerEvents(new onJoin(this), this);
         if (apocalypseEnabled){
             ApocalypseMain apocalypseMain = new ApocalypseMain(this);
