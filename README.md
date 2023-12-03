@@ -1,3 +1,8 @@
+# Note from Vaio2005/Filliravaz
+This repository was used a long time ago on a Minecraft SMP server called Amethyst Realms. It was forked so that I could work on it, and while the amount of work is just 3 commits (plus the one to update the readme) it was necessary as it fixed a main event less than 1 hour before the event itself was scheduled to start - That's why you can see that some of my commits have rushed names, it was a run "against time".
+
+
+
 # Amethyst Events
 This plugin is uses as the core system for managing server events on Amethyst Realms,
 <br>We do have a team of staff and developers who make and managed these events as well as the core system for the server (Not open source), but we could always use more events.
